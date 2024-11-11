@@ -1,19 +1,20 @@
 package main.user.domain;
 
 import java.util.Objects;
+import main.common.domain.PositiveIntegerCounter;
 
 public class User {
 
     private final Long id;
     private final UserInfo info;
-    private final UserRelationCounter followingCount;
-    private final UserRelationCounter followerCount;
+    private final PositiveIntegerCounter followingCount;
+    private final PositiveIntegerCounter followerCount;
 
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.info = userInfo;
-        this.followingCount = new UserRelationCounter();
-        this.followerCount = new UserRelationCounter();
+        this.followingCount = new PositiveIntegerCounter();
+        this.followerCount = new PositiveIntegerCounter();
     }
 
     public void follow(User targetUser) {
@@ -40,6 +41,10 @@ public class User {
 
     private void decreaseFollowerCount() {
         followerCount.decrease();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
