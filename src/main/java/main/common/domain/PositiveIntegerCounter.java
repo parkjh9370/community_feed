@@ -1,6 +1,7 @@
 package main.common.domain;
 
 public class PositiveIntegerCounter {
+
     public int count;
 
     public PositiveIntegerCounter() {
@@ -12,10 +13,14 @@ public class PositiveIntegerCounter {
     }
 
     public void decrease() {
-        if (this.count < 0) {
+        if (this.count <= 0) {
             return;
         }
 
         this.count--;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
