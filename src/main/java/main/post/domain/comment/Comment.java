@@ -14,8 +14,8 @@ public class Comment {
     private final Content content;
     private final PositiveIntegerCounter likeCount;
 
-    public static Comment createComment(Post post, User author, String content) {
-        return new Comment(null, post, author, new CommentContent(content));
+    public static Comment createComment(Long id, Post post, User author, String content) {
+        return new Comment(id, post, author, new CommentContent(content));
     }
 
     public Comment(Long id, Post post, User author, Content content) {
@@ -63,5 +63,21 @@ public class Comment {
 
     public String getContent() {
         return this.content.getContentText();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public Content getContentObject() {
+        return content;
     }
 }
