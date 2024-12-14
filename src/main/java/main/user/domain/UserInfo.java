@@ -1,5 +1,10 @@
 package main.user.domain;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
 public class UserInfo {
 
     private final String name;
