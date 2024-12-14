@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import main.common.repository.entity.TimeBaseEntity;
 
 @Entity
-@Table(name = "user_relation")
+@Table(name = "cf_user_relation")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

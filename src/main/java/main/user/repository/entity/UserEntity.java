@@ -14,7 +14,7 @@ import main.user.domain.User;
 import main.user.domain.UserInfo;
 
 @Entity
-@Table(name = "user")
+@Table(name = "cf_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
