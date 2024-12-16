@@ -1,6 +1,5 @@
 package main.user.application;
 
-import java.util.IllformedLocaleException;
 import main.user.application.dto.CreateUserRequestDto;
 import main.user.application.interfaces.UserRepository;
 import main.user.domain.User;
@@ -21,6 +20,6 @@ public class UserService {
     }
 
     public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow(IllformedLocaleException::new);
+        return userRepository.findById(id);
     }
 }
