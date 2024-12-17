@@ -3,7 +3,7 @@ package main.common.repository.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,8 +16,8 @@ public class TimeBaseEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDate create_dt;
+    private LocalDateTime create_dt;
 
     @LastModifiedDate
-    private LocalDate update_dt;
+    private LocalDateTime update_dt;
 }

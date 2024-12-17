@@ -12,12 +12,14 @@ import main.common.domain.PositiveIntegerCounter;
 import main.common.repository.entity.TimeBaseEntity;
 import main.user.domain.User;
 import main.user.domain.UserInfo;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "cf_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@DynamicUpdate
 public class UserEntity extends TimeBaseEntity {
 
     @Id

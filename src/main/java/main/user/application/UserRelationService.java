@@ -3,7 +3,9 @@ package main.user.application;
 import main.user.application.dto.FollowUserRequestDto;
 import main.user.application.interfaces.UserRelationRepository;
 import main.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserRelationService {
 
     private final UserService userService;
@@ -18,8 +20,8 @@ public class UserRelationService {
     }
 
     public void follow(FollowUserRequestDto dto) {
-        User user = userService.getUser(dto.getUserId());
-        User targetUser = userService.getUser(dto.getTargetUserId());
+        User user = userService.getUser(dto.userId());
+        User targetUser = userService.getUser(dto.targetUserId());
 
         if (userRelationRepository.isAlreadyFollow(user, targetUser)) {
             throw new IllegalArgumentException();
@@ -30,8 +32,8 @@ public class UserRelationService {
     }
 
     public void unfollow(FollowUserRequestDto dto) {
-        User user = userService.getUser(dto.getUserId());
-        User targetUser = userService.getUser(dto.getTargetUserId());
+        User user = userService.getUser(dto.userId());
+        User targetUser = userService.getUser(dto.targetUserId());
 
         if (!userRelationRepository.isAlreadyFollow(user, targetUser)) {
             throw new IllegalArgumentException();

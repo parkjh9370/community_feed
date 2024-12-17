@@ -82,10 +82,10 @@ public class User {
     }
 
     public String getProfileImage() {
-        return this.getProfileImage();
+        return this.info.getProfileImageUrl();
     }
 
     public String getName() {
-        return this.getName();
+        return this.info.getName();
     }
 }
