@@ -9,7 +9,9 @@ import main.post.domain.Post;
 import main.post.domain.comment.Comment;
 import main.user.application.UserService;
 import main.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService {
 
     private final UserService userService;
@@ -26,7 +28,7 @@ public class CommentService {
     }
 
     public Comment getComment(Long id) {
-        return commentRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        return commentRepository.findById(id);
     }
 
     public Comment createComment(CreateCommentRequestDto dto) {
@@ -37,8 +39,8 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public Comment updateComment(UpdateCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    public Comment updateComment(Long id, UpdateCommentRequestDto dto) {
+        Comment comment = getComment(id);
         User user = userService.getUser(dto.userId());
 
         comment.updateContent(user, dto.content());
@@ -48,7 +50,6 @@ public class CommentService {
     public void likeComment(LikeRequestDto dto) {
         Comment comment = getComment(dto.targetId());
         User user = userService.getUser(dto.userId());
-
         if (likeRepository.checkLike(comment, user)) {
             return;
         }

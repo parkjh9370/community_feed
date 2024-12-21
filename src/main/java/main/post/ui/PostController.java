@@ -36,7 +36,7 @@ public class PostController {
         return Response.ok(post.getId());
     }
 
-    @PostMapping("like")
+    @PostMapping("/like")
     public Response<Void> likePost(
         @RequestBody LikeRequestDto dto
     ) {
@@ -44,7 +44,7 @@ public class PostController {
         return Response.ok(null);
     }
 
-    @PostMapping("unlike")
+    @PostMapping("/unlike")
     public Response<Void> unlikePost(
         @RequestBody LikeRequestDto dto
     ) {

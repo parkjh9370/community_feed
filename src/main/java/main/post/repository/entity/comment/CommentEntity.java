@@ -40,14 +40,14 @@ public class CommentEntity extends TimeBaseEntity {
 
     private String content;
 
-    private Integer likeCounter;
+    private Integer likeCount;
 
     public CommentEntity(Comment comment) {
         this.id = comment.getId();
         this.user = new UserEntity(comment.getAuthor());
         this.post = new PostEntity(comment.getPost());
         this.content = comment.getContent();
-        this.likeCounter = comment.getLikeCount();
+        this.likeCount = comment.getLikeCount();
     }
 
     public Comment toComment() {
@@ -56,7 +56,7 @@ public class CommentEntity extends TimeBaseEntity {
             .author(user.toUser())
             .post(post.toPost())
             .content(new CommentContent(content))
-            .likeCount(new PositiveIntegerCounter(likeCounter))
+            .likeCount(new PositiveIntegerCounter(likeCount))
             .build();
     }
 }

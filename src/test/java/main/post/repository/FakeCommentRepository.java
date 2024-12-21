@@ -2,7 +2,6 @@ package main.post.repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import main.post.application.interfaces.CommentRepository;
 import main.post.domain.comment.Comment;
 
@@ -25,7 +24,7 @@ public class FakeCommentRepository implements CommentRepository {
     }
 
     @Override
-    public Optional<Comment> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public Comment findById(Long id) {
+        return store.get(id);
     }
 }
