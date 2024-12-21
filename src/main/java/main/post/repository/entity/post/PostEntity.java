@@ -19,6 +19,7 @@ import main.post.domain.Post;
 import main.post.domain.content.PostContent;
 import main.post.domain.content.PostPublicationState;
 import main.user.repository.entity.UserEntity;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "cf_post")
@@ -41,6 +42,9 @@ public class PostEntity extends TimeBaseEntity {
     private PostPublicationState state;
 
     private Integer likeCount;
+
+    @ColumnDefault("0")
+    private int commentCount;
 
     public PostEntity(Post post) {
         this.id = post.getId();

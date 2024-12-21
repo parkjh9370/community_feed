@@ -3,6 +3,7 @@ package main.user.repository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import main.post.repository.post_queue.UserPostQueueCommandRepository;
 import main.user.application.interfaces.UserRelationRepository;
 import main.user.domain.User;
 import main.user.repository.entity.UserEntity;
@@ -18,6 +19,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
     private final JpaUserRelationRepository jpaUserRelationRepository;
     private final JpaUserRepository jpaUserRepository;
+    private final UserPostQueueCommandRepository commandRepository;
 
 
     @Override
@@ -33,6 +35,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
         UserRelationEntity entity = new UserRelationEntity(user.getId(), targetUser.getId());
         jpaUserRelationRepository.save(entity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        commandRepository.saveFollowPost(user.getId(), targetUser.getId());
     }
 
     // TODO: saveAll 쿼리 처리
@@ -42,5 +45,6 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
         UserRelationIdEntity id = new UserRelationIdEntity(user.getId(), targetUser.getId());
         jpaUserRelationRepository.deleteById(id);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        commandRepository.deleteUnfollowPost(user.getId(), targetUser.getId());
     }
 }
