@@ -2,7 +2,6 @@ package main.post.repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import main.post.application.interfaces.PostRepository;
 import main.post.domain.Post;
 
@@ -24,7 +23,7 @@ public class FakePostRepository implements PostRepository {
     }
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public Post findById(Long id) {
+        return store.get(id);
     }
 }

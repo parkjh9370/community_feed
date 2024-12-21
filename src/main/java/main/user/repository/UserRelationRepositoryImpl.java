@@ -26,6 +26,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
         return jpaUserRelationRepository.existsById(id);
     }
 
+    // TODO: saveAll 쿼리 처리
     @Override
     @Transactional
     public void save(User user, User targetUser) {
@@ -34,6 +35,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
     }
 
+    // TODO: saveAll 쿼리 처리
     @Override
     @Transactional
     public void delete(User user, User targetUser) {
