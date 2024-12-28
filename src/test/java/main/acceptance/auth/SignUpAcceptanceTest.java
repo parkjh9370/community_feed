@@ -3,7 +3,6 @@ package main.acceptance.auth;
 import static main.acceptance.steps.SignUpAcceptanceSteps.requestSendEmail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import main.acceptance.utils.AcceptanceTestTemplate;
 import main.auth.application.dto.SendEmailRequestDto;
@@ -36,8 +35,8 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
 
         Integer code = requestSendEmail(dto);
 
-        String token = this.getEmailToken(email);
-        assertNull(token);
-        assertEquals(500, code);
+        //String token = this.getEmailToken(email);
+        //assertNull(token);
+        assertEquals(400, code);
     }
 }

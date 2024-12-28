@@ -27,8 +27,8 @@ public class DataLoader {
 
     public String getEmailToken(String email) {
         return entityManager.createNativeQuery(
-                "SELECT token from cf_email_verification WHERE email = ?", String.class)
-            .setParameter(1, null)
+                "SELECT token FROM cf_email_verification WHERE email = ?", String.class)
+            .setParameter(1, email)
             .getSingleResult()
             .toString();
     }
