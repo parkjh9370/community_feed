@@ -32,4 +32,11 @@ public class DataLoader {
             .getSingleResult()
             .toString();
     }
+
+    public boolean isEmailVerified(String email) {
+        return entityManager.createQuery(
+                "SELECT isVerified FROM EmailVerificationEntity WHERE email = :email", Boolean.class)
+            .setParameter("email", email)
+            .getSingleResult();
+    }
 }
