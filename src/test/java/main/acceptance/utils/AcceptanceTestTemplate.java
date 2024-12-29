@@ -1,5 +1,8 @@
 package main.acceptance.utils;
 
+import static main.acceptance.steps.LoginAcceptanceSteps.requestLoginGetToken;
+
+import main.auth.application.dto.LoginRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,5 +43,9 @@ public class AcceptanceTestTemplate {
 
     protected void createUser(String email) {
         loader.createUser(email);
+    }
+
+    protected String login(String email) {
+        return requestLoginGetToken(new LoginRequestDto(email, "password"));
     }
 }

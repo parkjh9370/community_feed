@@ -3,6 +3,7 @@ package main.acceptance;
 
 import static main.acceptance.steps.FeedAcceptanceSteps.requestCreatePost;
 import static main.acceptance.steps.FeedAcceptanceSteps.requestFeed;
+import static main.acceptance.steps.FeedAcceptanceSteps.requestFeedCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 class FeedAcceptanceTest extends AcceptanceTestTemplate {
 
+    private String token;
+
     /*
      * User1 - follow - User2
      * User1 - follow - User3
@@ -22,6 +25,7 @@ class FeedAcceptanceTest extends AcceptanceTestTemplate {
     @BeforeEach
     void setUp() {
         super.init();
+        this.token = login("user1@test.com");
     }
 
 
@@ -35,9 +39,17 @@ class FeedAcceptanceTest extends AcceptanceTestTemplate {
             PostPublicationState.PUBLIC);
         Long createdPostId = requestCreatePost(dto);
 
-        List<GetPostContentResponseDto> result = requestFeed(1L);
+        List<GetPostContentResponseDto> result = requestFeed(token);
 
         assertEquals(1, result.size());
         assertEquals(createdPostId, result.getFirst().getId());
     }
+
+    @Test
+    void givenUserHasFollower_whenFollowerUserRequestFeedWithInvalidToken_thenThrowError() {
+        Integer code = requestFeedCode("invalidToken");
+
+        assertEquals(400, code);
+    }
+
 }

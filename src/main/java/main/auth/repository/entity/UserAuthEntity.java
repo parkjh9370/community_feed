@@ -35,4 +35,6 @@ public class UserAuthEntity extends TimeBaseEntity {
     public UserAuth toUserAuth() {
         return new UserAuth(email, password, role, userId);
     }
+
+    
 }
