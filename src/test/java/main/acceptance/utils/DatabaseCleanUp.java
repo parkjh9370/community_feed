@@ -35,7 +35,7 @@ public class DatabaseCleanUp implements InitializingBean {
             })
             .toList();
 
-        notGeneratedTableNames = List.of("cf_user_relation", "cf_like");
+        notGeneratedTableNames = List.of("cf_user_auth", "cf_user_relation", "cf_like");
     }
 
     @Transactional

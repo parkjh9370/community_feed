@@ -55,4 +55,12 @@ public class EmailVerificationRepositoryImpl implements EmailVerificationReposit
 
         emailVerificationEntity.verify();
     }
+
+    @Override
+    public boolean isEmailVerified(Email email) {
+        EmailVerificationEntity emailVerificationEntity = jpaEmailVerificationRepository.findByEmail(
+                email.getEmailText())
+            .orElseThrow(() -> new IllegalArgumentException("인증이 처리되지 않은 이메일 입니다."));
+        return emailVerificationEntity.isVerified();
+    }
 }
