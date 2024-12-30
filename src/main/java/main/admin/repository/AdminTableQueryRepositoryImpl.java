@@ -31,7 +31,34 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
             .fetch()
             .size();
 
+        // (커버링)인덱스 기준 데이터 가져오기
+        List<Long> ids = jpaQueryFactory.select(userEntity.id)
+            .from(userEntity)
+            .where(likeName(dto.getName()))
+            .offset(dto.getOffset())
+            .limit(dto.getLimit())
+            .fetch();
         List<GetUserTableResponseDto> result = jpaQueryFactory
+            .select(
+                Projections.fields(
+                    GetUserTableResponseDto.class,
+                    userEntity.id.as("id"),
+                    userAuthEntity.email.as("email"),
+                    userEntity.name.as("name"),
+                    userAuthEntity.role.as("role"),
+                    userEntity.create_dt.as("createdAt"),
+                    userEntity.update_dt.as("updatedAt"),
+                    userAuthEntity.lastLoginAt.as("lastLoginAt")
+                )
+            )
+            .from(userEntity)
+            .join(userAuthEntity).on(userAuthEntity.userId.eq(userEntity.id))
+            .where(userEntity.id.in(ids))
+            .orderBy(userEntity.id.desc())
+            .fetch();
+
+        // 인덱스 적용이 안되어 수십만 데이터 있는 경우 느림
+        /*List<GetUserTableResponseDto> result = jpaQueryFactory
             .select(
                 Projections.fields(
                     GetUserTableResponseDto.class,
@@ -50,7 +77,7 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
             .orderBy(userEntity.id.desc())
             .offset(dto.getOffset())
             .limit(dto.getLimit())
-            .fetch();
+            .fetch();*/
 
         return new GetTableListResponse<>(total, result);
     }
