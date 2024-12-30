@@ -1,10 +1,12 @@
 package main.user.repository.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import main.common.repository.entity.TimeBaseEntity;
 import main.user.domain.User;
 import main.user.domain.UserInfo;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "cf_user")
@@ -33,6 +36,10 @@ public class UserEntity extends TimeBaseEntity {
     private Integer followerCount;
 
     private Integer followingCount;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDate create_date;
 
     public UserEntity(User user) {
         this.id = user.getId();
