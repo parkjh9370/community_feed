@@ -4,7 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import main.admin.ui.dto.GetDailyRegisterUserResponseDto;
+import main.admin.ui.dto.users.GetDailyRegisterUserResponseDto;
 import main.admin.ui.query.UserStatsQueryRepository;
 import main.common.utils.TimeCalculator;
 import main.user.repository.entity.QUserEntity;
