@@ -3,6 +3,8 @@ package main.admin.ui;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import main.admin.ui.dto.GetTableListResponse;
+import main.admin.ui.dto.post.GetPostTableRequestDto;
+import main.admin.ui.dto.post.GetPostTableResponseDto;
 import main.admin.ui.dto.users.GetDailyRegisterUserResponseDto;
 import main.admin.ui.dto.users.GetUserTableRequestDto;
 import main.admin.ui.dto.users.GetUserTableResponseDto;
@@ -32,8 +34,18 @@ public class AdminController {
     public Response<GetTableListResponse<GetUserTableResponseDto>> getUserTable(
         GetUserTableRequestDto dto
     ) {
-        GetTableListResponse<GetUserTableResponseDto> userTableData = adminTableQueryRepository.getUserTableData(
+        GetTableListResponse<GetUserTableResponseDto> userTable = adminTableQueryRepository.getUserTable(
             dto);
-        return Response.ok(userTableData);
+        return Response.ok(userTable);
+    }
+
+    @GetMapping("/posts")
+    public Response<GetTableListResponse<GetPostTableResponseDto>> getPostTable(
+        GetPostTableRequestDto dto
+    ) {
+        GetTableListResponse<GetPostTableResponseDto> postTable = adminTableQueryRepository.getPostTable(
+            dto);
+
+        return Response.ok(postTable);
     }
 }
